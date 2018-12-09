@@ -1,16 +1,29 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Starting Page</ion-title>
-  </ion-navbar>
+  <ion-nav color="primary">
+  Meal Status
+  </ion-nav>
 </ion-header>
 
 <ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    Home Page for App
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+ <form [formGroup]="langForm" *ngIf="show">
+    <ion-list radio-group formControlName="langs">
+
+      <ion-list-header color="primary">
+        Are you going to have next meal?
+      </ion-list-header>
+
+      <ion-item color="secondary">
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes" checked="true"></ion-radio>
+      </ion-item>
+      <ion-item color="danger">
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <button ion-button round full (click)="doSubmit()">Submit</button>
+  </form>
+  <ion-card color="secondary" id="card" *ngIf="show1">
+    <div class="dark" id="counter" align="center">Thank You for your response.</div>
+    </ion-card>
 </ion-content>

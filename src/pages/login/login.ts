@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthProvider } from '../../providers/auth/auth';
 import { EmailValidator } from '../../validators/email';
 import { HomePage } from '../home/home';
+import { AboutPage } from '../about/about';
 import { TabsPage } from '../tabs/tabs';
 @IonicPage()
 @Component({
@@ -36,8 +37,13 @@ export class LoginPage {
     } else {
       this.authData.loginUser(this.loginForm.value.email, this.loginForm.value.password)
       .then( authData => {
-      	console.log("Authentication Successful.");
-        this.navCtrl.setRoot(TabsPage);
+      	console.log("Authentication Successful. "+this.loginForm.value.email);
+        if(this.loginForm.value.email=="manager@mess.com")
+        {
+          this.navCtrl.setRoot(AboutPage);
+        }
+        else
+          this.navCtrl.setRoot(HomePage);
       }, error => {
         this.loading.dismiss().then( () => {
           let alert = this.alertCtrl.create({
